@@ -45,7 +45,7 @@ public class RestAssuredClient {
     }
 
     public static Response post(String endpoint, Object body) {
-        RequestSpecification request = RestAssured.given().headers(DEFAULT_HEADERS).body(body).log().all();
+        RequestSpecification request = RestAssured.given().headers(DEFAULT_HEADERS).body(body);
         return request.post(BASE_URL + endpoint);
     }
 
@@ -55,7 +55,7 @@ public class RestAssuredClient {
     }
 
     public static Response delete(String endpoint, Map<String, String> headers) {
-        RequestSpecification request = RestAssured.given().headers(headers);
+        RequestSpecification request = RestAssured.given().headers(mergeHeaders(headers)).log().all();
         return request.delete(BASE_URL + endpoint);
     }
 }

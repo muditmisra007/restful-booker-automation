@@ -7,27 +7,30 @@ import io.restassured.response.Response;
 import java.util.HashMap;
 import java.util.Map;
 
-public class BookingApi {
+public class BookingApi extends RestAssuredClient{
 
     public static Response createBooking(BookingRequest booking) {
-        return RestAssuredClient.post("/booking", booking);
+        return post("/booking", booking);
     }
 
     public static Response getBooking(int bookingId) {
-        return RestAssuredClient.get("/booking/" + bookingId);
+        return get("/booking/" + bookingId);
     }
 
+    public static Response getBookingIds() {
+        return get("/booking" );
+    }
     public static Response updateBooking(int bookingId, BookingRequest booking, String authToken) {
         Map<String, String> headers = new HashMap<>();
         headers.put("Cookie", "token=" + authToken);
         headers.put("Accept", "application/json");
 
-        return RestAssuredClient.put("/booking/" + bookingId, booking, headers);
+        return put("/booking/" + bookingId, booking, headers);
     }
 
     public static Response deleteBooking(int bookingId, String authToken) {
         Map<String, String> headers = new HashMap<>();
         headers.put("Cookie", "token=" + authToken);
-        return RestAssuredClient.delete("/booking/" + bookingId, headers);
+        return delete("/booking/" + bookingId, headers);
     }
 }

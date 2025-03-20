@@ -13,7 +13,7 @@ public class AuthApi {
         body.put("username", username);
         body.put("password", password);
         Response response = RestAssuredClient.post("/auth", body);
-
+        response.prettyPrint();
         return response.jsonPath().getString("token");
     }
 }
