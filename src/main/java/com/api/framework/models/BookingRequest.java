@@ -22,13 +22,13 @@ public class BookingRequest {
     @JsonProperty("additionalneeds")
     private String additionalneeds;
 
-    private BookingRequest(Builder builder) {
-        this.firstname = builder.firstName;
-        this.lastname = builder.lastName;
-        this.totalprice = builder.totalPrice;
-        this.depositpaid = builder.depositPaid;
-        this.bookingdates = builder.bookingDates;
-        this.additionalneeds = builder.additionalNeeds;
+    BookingRequest(BookingRequestBuilder builder) {
+        this.firstname = builder.getFirstName();
+        this.lastname = builder.getLastName();
+        this.totalprice = builder.getTotalPrice();
+        this.depositpaid = builder.isDepositPaid();
+        this.bookingdates = builder.getBookingDates();
+        this.additionalneeds = builder.getAdditionalNeeds();
     }
 
     // Getter methods (used for serialization)
@@ -38,48 +38,4 @@ public class BookingRequest {
     public boolean isDepositpaid() { return depositpaid; }
     public BookingDates getBookingdates() { return bookingdates; }
     public String getAdditionalneeds() { return additionalneeds; }
-
-    // Builder Class (Setter method names remain unchanged)
-    public static class Builder {
-        private String firstName;
-        private String lastName;
-        private int totalPrice;
-        private boolean depositPaid;
-        private BookingDates bookingDates;
-        private String additionalNeeds;
-
-        public Builder setFirstName(String firstName) {
-            this.firstName = firstName;
-            return this;
-        }
-
-        public Builder setLastName(String lastName) {
-            this.lastName = lastName;
-            return this;
-        }
-
-        public Builder setTotalPrice(int totalPrice) {
-            this.totalPrice = totalPrice;
-            return this;
-        }
-
-        public Builder setDepositPaid(boolean depositPaid) {
-            this.depositPaid = depositPaid;
-            return this;
-        }
-
-        public Builder setBookingDates(BookingDates bookingDates) {
-            this.bookingDates = bookingDates;
-            return this;
-        }
-
-        public Builder setAdditionalNeeds(String additionalNeeds) {
-            this.additionalNeeds = additionalNeeds;
-            return this;
-        }
-
-        public BookingRequest build() {
-            return new BookingRequest(this);
-        }
-    }
 }

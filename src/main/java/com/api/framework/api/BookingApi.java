@@ -1,36 +1,38 @@
 package com.api.framework.api;
 
-import com.api.framework.core.RestAssuredClient;
 import com.api.framework.models.BookingRequest;
 import io.restassured.response.Response;
 
 import java.util.HashMap;
 import java.util.Map;
 
-public class BookingApi extends RestAssuredClient{
+public class BookingApi extends AbstractApi {
 
-    public static Response createBooking(BookingRequest booking) {
-        return post("/booking", booking);
+    private static final String BASE_URL = "/booking";
+
+    public Response createBooking(BookingRequest booking) {
+        return post(BASE_URL, booking);
     }
 
-    public static Response getBooking(int bookingId) {
-        return get("/booking/" + bookingId);
+    public Response getBooking(int bookingId) {
+        return get(BASE_URL + "/" + bookingId);
     }
 
-    public static Response getBookingIds() {
-        return get("/booking" );
+    public Response getBookingIds() {
+        return get(BASE_URL);
     }
-    public static Response updateBooking(int bookingId, BookingRequest booking, String authToken) {
+
+    public Response updateBooking(int bookingId, BookingRequest booking, String authToken) {
         Map<String, String> headers = new HashMap<>();
         headers.put("Cookie", "token=" + authToken);
         headers.put("Accept", "application/json");
 
-        return put("/booking/" + bookingId, booking, headers);
+        return put(BASE_URL + "/" + bookingId, booking, headers);
     }
 
-    public static Response deleteBooking(int bookingId, String authToken) {
+    public Response deleteBooking(int bookingId, String authToken) {
         Map<String, String> headers = new HashMap<>();
         headers.put("Cookie", "token=" + authToken);
-        return delete("/booking/" + bookingId, headers);
+        return delete(BASE_URL + "/" + bookingId, headers);
     }
 }
